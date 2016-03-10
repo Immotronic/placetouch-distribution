@@ -1,0 +1,24 @@
+#! /bin/sh
+#------------------------------------------------
+# Reseting and launching the PlaceTouch framework
+# for debugging purpose
+#------------------------------------------------
+
+config="-Dfelix.config.properties=file:../conf/config.properties"
+debug="-Dlogback.configurationFile=../conf/logback.xml"
+
+## Setting for MACOSX native libs
+#
+natives=-Djava.library.path=../native/MacOSX/x86_64/
+
+## Setting for LINUX native libs
+#natives=-Djava.library.path=../native/Linux/x86_32/
+
+cd system/
+
+if [ "$1" = "reset" ] ; then
+   rm -R felix-cache/
+   rm -R ../databases/system
+fi
+
+java ${config} ${debug} ${natives} -jar bin/felix.jar

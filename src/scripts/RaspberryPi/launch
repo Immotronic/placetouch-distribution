@@ -1,0 +1,21 @@
+#! /bin/sh
+#------------------------------------------------
+# Reseting and launching the PlaceTouch framework
+# for debugging purpose
+#------------------------------------------------
+
+config="-Dfelix.config.properties=file:../conf/config.properties"
+debug="-Dlogback.configurationFile=../conf/logback.xml"
+
+## Setting for RaspberryPi native libs
+#
+natives=-Djava.library.path=/usr/lib/jni/
+
+cd system/
+
+if [ "$1" = "reset" ] ; then
+   rm -R felix-cache/
+   rm -R ../databases/system
+fi
+
+java ${config} ${debug} ${natives} -jar bin/felix.jar
